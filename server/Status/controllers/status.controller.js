@@ -39,7 +39,7 @@ exports.getAllStatus = (req, res)=> {
  exports.createnewstatus = (req, res) =>{
     const UserReqData = new StatusModel(req.body);
    
-    console.log('employeeReqData', UserReqData);
+    console.log('employeeReqData',req.body);
     // check null
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
         res.send(400).send({success: false, message: 'Please fill all fields'});
@@ -48,7 +48,7 @@ exports.getAllStatus = (req, res)=> {
             if(err){
             res.send(err);}
             else{
-            res.json({status: true, message: 'Story Created Successfully',data:user})}
+            res.send({status: true, message: 'Story Created Successfully',data:user})}
         })
     }
 }

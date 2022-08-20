@@ -5,7 +5,7 @@ const dbConn = mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'',
-    database:'distributed'
+    database:'distributed2'
 });
 
 dbConn.connect(function(error){
