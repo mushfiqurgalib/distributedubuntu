@@ -1,4 +1,4 @@
-var dbConn  = require('../../config/db.config');
+var dbConn  = require('../../Status/config/db.config');
 
 var Status=function(status){
     this.email=status.email;

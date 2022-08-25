@@ -1,4 +1,4 @@
-var dbConn  = require('../../config/db.config');
+var dbConn  = require('../../Status/config/db.config');
 const jwt=require('jsonwebtoken');
 var User = function(users){
     this.email     =   users.email;

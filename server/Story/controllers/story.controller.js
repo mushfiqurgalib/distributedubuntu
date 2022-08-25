@@ -5,7 +5,7 @@ const jwt=require('jsonwebtoken');
 const minio=require('minio');
 const crypto=require('crypto');
 const { diskStorage } = require('multer');
-var dbConn  = require('../../config/db.config');
+var dbConn  = require('../../Status/config/db.config');
 
 var minioClient = new minio.Client({
     endPoint: '127.0.0.1',
