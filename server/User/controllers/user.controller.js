@@ -1,5 +1,5 @@
 
-const UserModel = require('../../User/models/user.model');
+const UserModel = require('../models/user.model');
 
 
 // get all employee list

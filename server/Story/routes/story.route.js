@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer=require('multer');
 
-const employeeController = require('../../Story/controllers/story.controller');
+const employeeController = require('../controllers/story.controller');
 
 const fileengine=multer.diskStorage({
     destination:(req,file,cb)=>{

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer=require('multer');
 
-const employeeController = require('../../User/controllers/user.controller');
+const employeeController = require('../controllers/user.controller');
 
 
 

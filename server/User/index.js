@@ -23,7 +23,7 @@ app.get('/', (req, res)=>{
     res.send('Hello World');
 });
 // import employee routes
-const employeeRoutes = require('../User/routes/user.route');
+const employeeRoutes = require('./routes/user.route');
 
 // create employee routes
 app.use('/api/v1/employee', employeeRoutes);
