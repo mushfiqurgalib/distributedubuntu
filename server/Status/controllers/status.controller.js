@@ -7,13 +7,7 @@ const crypto=require('crypto');
 const { diskStorage } = require('multer');
 var dbConn  = require('../config/db.config');
 
-var minioClient = new minio.Client({
-    endPoint: '127.0.0.1',
-    port: 9000  ,
-    useSSL: false,
-    accessKey: 'IQG3CTw2fY9Hwav5',
-    secretKey: 'lIeujKtaDuynNuT89jBTVfoDnawkRRVZ'
-});
+
 
 
 exports.getAllStatus = (req, res)=> {

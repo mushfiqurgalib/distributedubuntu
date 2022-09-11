@@ -1,16 +1,15 @@
-const mysql=require('mysql');
+const mysql=require('mysql2');
 
 const dbConn = mysql.createConnection({
-    port:3308,
-    host:'localhost',
+    host:'db',
     user:'root',
-    password:'',
+    password:'root',
     database:'users'
 });
 
-dbConn.connect(function(error){
-if(error) throw error;
-console.log('database connected');
-})
+// dbConn.connect(function(error){
+// if(error) throw error;
+// console.log('database connected');
+// })
 
 module.exports=dbConn;

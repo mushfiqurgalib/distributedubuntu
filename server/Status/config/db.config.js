@@ -1,10 +1,10 @@
-const mysql=require('mysql');
+const mysql=require('mysql2');
 
 const dbConn = mysql.createConnection({
-    port:3308,
-    host:'localhost',
+  
+    host:'statusdb',
     user:'root',
-    password:'',
+    password:'root',
     database:'status'
 });
 

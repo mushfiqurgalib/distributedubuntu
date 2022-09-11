@@ -1,10 +1,9 @@
-const mysql=require('mysql');
+const mysql=require('mysql2');
 
 const dbConn = mysql.createConnection({
-    port:3308,
-    host:'localhost',
+    host:'storydb',
     user:'root',
-    password:'',
+    password:'root',
     database:'story'
 });
 

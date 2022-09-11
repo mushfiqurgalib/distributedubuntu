@@ -14,7 +14,7 @@ const port = process.env.PORT || 5001;
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.json());
- app.use(cors());
+app.use(cors('*'));
 // parse request data content type application/json
 app.use(bodyParser.json());
 

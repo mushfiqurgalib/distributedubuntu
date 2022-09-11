@@ -1,11 +1,11 @@
-var dbConn  = require('../config/db.config');
-const jwt=require('jsonwebtoken');
-var User = function(users){
-    this.email     =   users.email;
+var dbConn = require('../config/db.config');
+const jwt = require('jsonwebtoken');
+var User = function (users) {
+    this.email = users.email;
 
-    this.password          =   users.password;
+    this.password = users.password;
 
- 
+
 }
 
 
@@ -23,20 +23,26 @@ var User = function(users){
 // }
 
 // get employee by ID from DB
-User.getUserByemail = (employeeReqData, result)=>{
-    dbConn.query('SELECT * FROM users WHERE email=? AND password=?', [employeeReqData.email,employeeReqData.password], (err, res)=>{
+User.getUserByemail = (employeeReqData, result) => {
+
+    dbConn.connect(function (error) {
+        if (error) throw error;
+        console.log('database connected');
+    })
+    dbConn.query('SELECT * FROM users WHERE email=? AND password=?', [employeeReqData.email, employeeReqData.password], (err, res) => {
         console.log(res);
-        if(err){
+        if (err) {
             console.log('Error while fetching employee by name', err);
-             result(null, err);
-        }else{
-            if(res.length==1){
-            const username=employeeReqData.email;
-            const user={name:username};
-            const access=jwt.sign(user,process.env.JWT_KEY);
-             result(null,access);}
+            result(null, err);
+        } else {
+            if (res.length == 1) {
+                const username = employeeReqData.email;
+                const user = { name: username };
+                const access = jwt.sign(user, process.env.JWT_KEY);
+                result(null, access);
+            }
             // result(null, res);
-           
+
         }
     })
 }
@@ -44,12 +50,17 @@ User.getUserByemail = (employeeReqData, result)=>{
 
 
 // create new employee
-User.createUser = (employeeReqData, result) =>{
-    dbConn.query('INSERT INTO users SET ? ', employeeReqData, (err, res)=>{
-        if(err){
+User.createUser = (employeeReqData, result) => {
+
+    dbConn.connect(function (error) {
+        if (error) throw error;
+        console.log('database connected');
+    })
+    dbConn.query('INSERT INTO users SET ? ', employeeReqData, (err, res) => {
+        if (err) {
             console.log('Error while inserting data');
             result(null, err);
-        }else{
+        } else {
             console.log('Employee created successfully');
             result(null, res)
         }
@@ -57,10 +68,10 @@ User.createUser = (employeeReqData, result) =>{
 }
 
 // User.generateJwt = function() {
-  
+
 //     return jwt.sign (users.email,process.env.JWT_KEY);
 
-      
+
 // }
 
 
