@@ -16,11 +16,6 @@ const fileengine=multer.diskStorage({
 const upload=multer({storage:fileengine});
 
 
-// get all employees
-// router.get('/', employeeController.getEmployeeList);
-
-// get employee by ID
-
 
 router.post('/story',upload.single("image"), employeeController.createnewstory);
 

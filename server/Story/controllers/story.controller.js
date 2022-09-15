@@ -8,38 +8,12 @@ const { diskStorage } = require('multer');
 var dbConn  = require('../config/db.config');
 
 var minioClient = new minio.Client({
-    endPoint: '127.0.0.1',
+    endPoint: 'storyobjectdb',
     port: 9000  ,
     useSSL: false,
     accessKey: 'IQG3CTw2fY9Hwav5',
     secretKey: 'lIeujKtaDuynNuT89jBTVfoDnawkRRVZ'
 });
-// get all employee list
-
-// exports.verifyJwt = (req, res, next) => {
-//     var token=req.body.jwttoken;
-//     // if('authorization' in req.headers)
-//     //     token = req.headers['authorization'].split(' ')[1];
-
-//     if(!token)
-//         return res.status(403).send({auth: false, message: 'No token provided.'});
-
-//     else{
-//         jwt.verify(token, process.env.JWT_SECRET,
-//             (err, decoded) => {
-//                 if(err)
-//                     return res.status(500).send({ auth: false, message: 'Token authentication failed' });
-//                 else{
-//                     req._id = decoded._id;
-//                     next()
-//                 }
-//             }
-//         )
-//     }
-
-// }
-// create new employee
-
 
 exports.getAllStory = (req, res)=> {
     //console.log('here all employees list');
@@ -61,6 +35,7 @@ exports.getAllStory = (req, res)=> {
     exports.createnewstory=(req,res)=>{
         // console.log(req.file);
         // console.log(req.body);
+        console.log("Hi")
         var uuid=crypto.randomUUID();
        
         // story.email=req.body.email;
@@ -75,13 +50,14 @@ exports.getAllStory = (req, res)=> {
             }
         })
         
-        
-        minioClient.fPutObject('class', uuid, req.file.path, function(err, objInfo) {
+        console.log(req.file.path);
+        minioClient.fPutObject('class', uuid, req.file.path, async function(err) {
             if(err) {
-                res.send(err);
+                console.log("log")
+                // res.send(err);
             }
-            console.log("Success", objInfo.etag, objInfo.versionId)
-        })
+            // console.log("Success", objInfo.etag, objInfo.versionId)
+        });
         console.log(req.file);
         res.send("Success");
  }

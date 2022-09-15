@@ -11,6 +11,7 @@ services:
     depends_on:
       - userservice
       - statusservice
+      - storyservice
     
 
   # phpmyadmin:
@@ -38,7 +39,7 @@ services:
       MYSQL_DATABASE: 'users'
     volumes:
      - ./userdb:/docker-entrypoint-initdb.d
-     - /mysql/data:/var/lib/mysql
+     - mysqluser:/var/lib/mysql
 
   statusservice:
     build: ./Status
@@ -54,6 +55,40 @@ services:
       MYSQL_DATABASE: 'status'
     volumes:
      - ./statusdb:/docker-entrypoint-initdb.d
-     - /mysql/data1:/var/lib/mysql   
+     -  mysqlstatus:/var/lib/mysql  
 
+  storyservice:
+    build: ./Story
+    restart: unless-stopped
+    depends_on:
+      - storydb
+      - storyobjectdb 
 
+  storydb:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'story'
+    volumes:
+     - ./storydb:/docker-entrypoint-initdb.d
+     -  mysqlstory:/var/lib/mysql  
+
+  storyobjectdb:
+    image: minio/minio:latest
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server --address 0.0.0.0:9000 --console-address ":9001" /data
+    volumes:
+      - storyobjectdata:/data             
+
+volumes:
+  mysqluser:
+  mysqlstatus:
+  mysqlstory:
+  storyobjectdata:
+  
