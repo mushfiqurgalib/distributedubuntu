@@ -2,7 +2,8 @@ version: '3'
 
 services:
   nginx:
-    image: nginx
+    image: mushfiqurgalib/client
+    build: .
     restart: unless-stopped
     ports:
       - 100:100
@@ -14,19 +15,15 @@ services:
       - storyservice
     
 
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   restart: always
-  #   ports: 
-  #     - 8077:80
-  #   environment:
-  #     - PMA_HOST= db
-  #   depends_on:
-  #     - db
-    
+
+  # clientservice:
+  #   build: ./client
+  #   restart: unless-stopped
+      
 
   userservice:
-    build: ./User
+    image: mushfiqurgalib/userservice
+    build: ./server/User
     restart: unless-stopped
     depends_on:
       - db
@@ -38,11 +35,12 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_DATABASE: 'users'
     volumes:
-     - ./userdb:/docker-entrypoint-initdb.d
+     - ./server/userdb:/docker-entrypoint-initdb.d
      - mysqluser:/var/lib/mysql
 
   statusservice:
-    build: ./Status
+    image: mushfiqurgalib/statusservice
+    build: ./server/Status
     restart: unless-stopped
     depends_on:
       - statusdb 
@@ -54,11 +52,12 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_DATABASE: 'status'
     volumes:
-     - ./statusdb:/docker-entrypoint-initdb.d
+     - ./server/statusdb:/docker-entrypoint-initdb.d
      -  mysqlstatus:/var/lib/mysql  
 
   storyservice:
-    build: ./Story
+    image: mushfiqurgalib/storyservice
+    build: ./server/Story
     restart: unless-stopped
     depends_on:
       - storydb
@@ -71,7 +70,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_DATABASE: 'story'
     volumes:
-     - ./storydb:/docker-entrypoint-initdb.d
+     - ./server/storydb:/docker-entrypoint-initdb.d
      -  mysqlstory:/var/lib/mysql  
 
   storyobjectdb:

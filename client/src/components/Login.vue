@@ -88,7 +88,7 @@ export default {
 
   methods: {
     async handleSubmit() {
- const res = await axios.post("/user", {
+ const res = await axios.post("http://10.100.104.13:100/user", {
       
         email: this.email,
         password:this.password

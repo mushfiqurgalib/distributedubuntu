@@ -105,7 +105,7 @@ export default {
     fetchInfo() {
       // console.log(localStorage.getItem("email"));
        this.email = localStorage.getItem("email");
-        axios.get("/status/" + this.email).then((res) => (this.info = res.data));
+        axios.get("http://10.100.104.13:100/status/" + this.email).then((res) => (this.info = res.data));
     
       }
 

@@ -30,7 +30,7 @@ export default {
 
   methods: {
     async handleSubmit() {
- const res = await axios.post("/status", {
+ const res = await axios.post("http://10.100.104.13:100/status", {
       
         status: this.status,
         // email:axios.get("api/v1/employee/profile/"+localStorage.getItem("Jwt")).then((response)=>{response.data.name})
